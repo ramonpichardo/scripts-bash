@@ -1,9 +1,33 @@
 #!/usr/bin/env bash
-#Update a CentOS or Red Hat system
-#Install necessary applications
-#Restart the system
+
+# Enable third-party repositories
+yum -y install epel-release
+rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+
+# Update a CentOS or Red Hat system
 yum -y update && yum -y upgrade
-yum -y install epel-release gcc hdparm htop httpd java links lshw lsusb nmap p7zip pciutils rkhunter speedtest-cli tcpdump vmstat webmin wget whois
-yum -y install git python python-devel python-pip openssl ansible
-yum -y install tmux screen xfsprogs
+
+# Install utilities
+yum -y install gcc hdparm htop java lshw lsusb network-tools nmap openssl pciutils rkhunter speedtest-cli tcpdump p7zip vmstat webmin wget whois xfsprogs
+
+# Install browsers
+yum -y install links
+
+# Install servers
+yum -y httpd
+
+# Install python
+yum -y install python python-devel python-pip
+
+# Install git
+yum -y install git
+
+# Install ansible
+yum -y ansible
+
+# Install terminal multiplexers
+yum -y install tmux screen
+
+# Restart the system
 reboot
