@@ -4,6 +4,10 @@
 yum -y install epel-release
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
+yum install yum-plugin-fastestmirror
+
+# Upgrade Linux kernel
+yum --enablerepo=elrepo-kernel install kernel-ml-4.*
 
 # Update a CentOS or Red Hat system
 yum -y update && yum -y upgrade
