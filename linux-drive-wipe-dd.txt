@@ -1,0 +1,28 @@
+mount.cifs {service} {mount point} -o options 
+
+mount -t cifs //server/share /media/JLG -o user="acme/rpichardo" 
+
+External Hard Drive: WD Elements Desktop WDBAAU0020HBK - hard drive - 2 TB - USB 2.0 Series 
+
+Note: In order to use the option "status=progress" for the dd command you must have coreutils version 8.24 or a later version thereof. 
+
+
+Wipe out a hard drive 
+Boot up computer with a Linux Live CD 
+Open Terminal 
+In Terminal, run as root: sudo su  (root@debian:~$  --> root@debian:~# ) 
+Use dd to write over the entire drive with zeroes: dd if=/dev/zero of=/dev/sdc bs=4096 status=progress 
+
+Sample Output 
+dd: error writing '/dev/sdc': no space left on device 
+488378113+0 records in 
+488378113+0 records out 
+2000396746752 bytes (2.0 TB, 1.8 TiB) copied, 44730 s, 44.7 MB/s 
+
+Write over the entire drive with random data: dd if=/dev/urandom of=/dev/sdc status=progress 
+
+Sample Output 
+dd: error writing '/dev/sdc': no space left on device 
+3907024897+0 records in 
+3907024897+0 records out 
+2000396746752 bytes (2.0 TB, 1.8 TiB) copied, 371733 s, 5.4 MB/s 
