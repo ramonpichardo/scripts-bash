@@ -4,7 +4,7 @@
 export PS1="\u@\h [\w] $ "
 
 # Add date & time prefix for each saved command in the history file
-export HISTTIMEFORMAT=\"%Y-%m-%d %T \"
+export HISTTIMEFORMAT="%Y-%m-%d %T "
 
 # Don't save commands starting with a space in the history file
 # Don't put duplicate lines in the history file
