@@ -17,9 +17,7 @@ source ~/.bash_profile
 
 softwareupdate -ia
 
-xcode-select --install
-
-xcodebuild -license
+xcode-select --install && xcodebuild -license
 
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
