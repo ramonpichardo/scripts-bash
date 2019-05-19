@@ -1,5 +1,8 @@
 # Note: Source the Bash profile after changing it: source ~/.bash_profile
 
+# Update PATH to include scripts directory in home directory
+export PATH="$PATH:~/scripts"
+
 # Set prompt to "user@hostname [current working directory] $ "
 export PS1="\u@\h [\w] $ "
 
