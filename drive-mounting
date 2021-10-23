@@ -1,0 +1,4 @@
+- Use a drive's UUID to mount the drive to a directory
+- Get the drive's UUID info via blkid (e.g., UUID="<8-4-4-4-12>" TYPE="xfs")
+- mount UUID="<8-4-4-4-12>" /<mountpoint>
+- Update info accordingly in directory /etc/fstab
