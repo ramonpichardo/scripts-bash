@@ -1,0 +1,46 @@
+### install packagekit so realm can deal with and install missing packages
+$ sudo apt install krb5-user samba sssd chrony sssd-tools libnss-sss libpam-sss adcli realmd packagekit
+
+---
+SSSD Configuration file: /etc/sssd/sssd.conf
+[sssd]
+domains = acme.org
+default_domain_suffix = acme.org
+config_file_version = 2
+services = nss, pam
+full_name_format = %1$s
+
+[domain/acme.org]
+ad_domain = acme.org
+krb5_realm = ACME.ORG
+realmd_tags = manages-system joined-with-samba
+cache_credentials = True
+id_provider = ad
+krb5_store_password_if_offline = True
+default_shell = /bin/bash
+ldap_id_mapping = True
+use_fully_qualified_names = True
+fallback_homedir = /home/%u
+access_provider = simple
+simple_allow_groups = sg_linuxadmins, sg_infraadmins
+simple_allow_users = svc_acme_linuxadmin00
+---
+
+After saving this file, set the ownership to root and the file permissions to 600:
+$ sudo chown root:root /etc/sssd/sssd.conf
+$ sudo chmod 600 /etc/sssd/sssd.conf
+
+---
+Realm Configuration File: /etc/realmd.conf
+### see man realmd.conf for details. 
+[service] 
+automatic-install = no
+---
+
+AD Connection for Linux
+$ sudo realm join --user=linuxadmin01 --computer-ou="OU=Managed,OU=Servers,DC=acme,DC=org" acme.org --install=/
+$ sudo realm deny --all
+### $ sudo realm permit -g <sg you want to have access>
+$ sudo realm permit -g sg_linuxadmins
+$ sudo realm permit svc_acme_linuxadmin00
+$ sudo sed -i.orig -e '4idefault_domain_suffix\ \=\ acme\.org' -e '6ifull_name_format\ \=\ \%1\$s' -e 's/\@\%d//g' /etc/sssd/sssd.conf && systemctl restart sssd
