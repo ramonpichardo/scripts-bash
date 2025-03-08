@@ -26,9 +26,6 @@ alias nmap1000="nmap -vv -O -P0 -sTUV --top-ports 1000"
 # Set Socks port traffic redirection
 alias socks5="ssh -D 40022 -f -C -q -N username@50.137.137.96"
 
-# Set alias for Apple Airport wireless CLI access
-alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport"
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
 	{ echo $PATH | grep -q "$HOME/bin:"; } || PATH="$HOME/bin:$PATH"
